@@ -17,11 +17,13 @@ class App extends Component {
   }
 
   deleteTodo(itemToBeDeleted) {
-    const remove = this.state.todos.filter((todos) => {
-      return todos != itemToBeDeleted
+  console.log("itemToBeDeleted = " + itemToBeDeleted)
+  const remove = this.state.todos.filter((todos) => {
+    console.log("todos = " + todos)
+    return todos !== itemToBeDeleted
     });
 
-    this.setState({ todos: remove });
+  this.setState({ todos: remove });
   };
 
 
@@ -29,6 +31,7 @@ class App extends Component {
 
   handleChange(e) {
     this.setState({ newTodoDescription: e.target.value })
+
   }
 
   handleSubmit(e) {
@@ -36,6 +39,7 @@ class App extends Component {
     if (!this.state.newTodoDescription) { return }
     const newTodo = { description: this.state.newTodoDescription, isCompleted: false };
     this.setState({ todos: [...this.state.todos, newTodo], newTodoDescription: '' });
+
   }
 
   toggleCompete(index) {
@@ -43,7 +47,9 @@ class App extends Component {
     const todo = todos[index];
     todo.isCompleted = todo.isCompleted ? false : true;
     this.setState({ todos: todos });
-}
+  }
+
+
 
   render() {
     return (
