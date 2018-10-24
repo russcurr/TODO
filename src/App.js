@@ -14,17 +14,18 @@ class App extends Component {
       newTodoDescription: ''
 
     };
+    
   }
 
-  deleteTodo(itemToBeDeleted) {
-  console.log("itemToBeDeleted = " + itemToBeDeleted)
-  const remove = this.state.todos.filter((todos) => {
-    console.log("todos = " + todos)
-    return todos !== itemToBeDeleted
+  deleteTodo(index) {
+    const remove = this.state.todos.filter((todo, i) => {
+      return i !== index
     });
 
-  this.setState({ todos: remove });
+    this.setState({ todos: remove });
   };
+
+
 
 
 
@@ -57,7 +58,7 @@ class App extends Component {
         <ul>
           { this.state.todos.map( (todo, index) =>
             <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted} toggleCompete={ () => this.toggleComplete(index) }
-            deleteTodo={ this.deleteTodo } />
+            deleteTodo={() => this.deleteTodo(index)} />
           )}
         </ul>
         <form onSubmit={ (e) => this.handleSubmit(e) }>
